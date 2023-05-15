@@ -28,7 +28,7 @@ Database: myappdb
 
 ### Redis Insight
 
-E' possibile visualizzare graficamente il comportamento e lo stato di MongoDB tramite [Redis Insight](https://redis.com/redis-enterprise/redis-insight/).
+E' possibile visualizzare graficamente il comportamento e lo stato di Redis tramite [Redis Insight](https://redis.com/redis-enterprise/redis-insight/).
 
 ```
 Host: localhost
