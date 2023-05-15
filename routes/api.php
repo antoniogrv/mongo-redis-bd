@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +21,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('users', function (Request $request) {
     return \App\Models\User::all();
+});
+
+Route::get('get', function (Request $request) {
+    return Cache::get('test');
+});
+
+Route::get('set', function (Request $request) {
+    return Cache::set('test', random_int(0, 100));
 });
