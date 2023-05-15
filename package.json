@@ -1,8 +1,10 @@
 {
     "private": true,
     "scripts": {
-        "build": "./vendor/bin/sail build",
-        "up": "./vendor/bin/sail up"
+        "init": "docker run --rm --interactive --tty -v $(pwd):/app composer install",
+        "build": "./vendor/bin/sail build --no-cache",
+        "up": "./vendor/bin/sail up",
+        "migrate": " ./vendor/bin/sail artisan migrate:fresh --seed"
     },
     "devDependencies": {
         "axios": "^0.21",
