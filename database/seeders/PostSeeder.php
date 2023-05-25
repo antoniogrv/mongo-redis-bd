@@ -17,8 +17,9 @@ class PostSeeder extends Seeder
     {
         Author::query()->each(function (Author $author) {
             Post::factory([
-                'author_id' => $author->id
-            ])->count(5)->create();
+                'author_id' => $author->id,
+                'image' => 'assets/' . rand(1, 10) . '.jpeg'
+            ])->count(2)->create();
         });
     }
 }

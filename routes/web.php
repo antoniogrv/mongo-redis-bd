@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('pages.home', [
+        'posts' => \App\Models\Post::all()->sortBy('body')
+    ]);
+})->name('home');
+
+Route::resources([
+    'posts' => PostController::class,
+    'comments' => CommentController::class,
+]);

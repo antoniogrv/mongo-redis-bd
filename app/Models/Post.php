@@ -13,6 +13,7 @@ use Jenssegers\Mongodb\Relations\HasMany;
  * @property string $title
  * @property string $description
  * @property string $body
+ * @property string $image
  * @property integer $author_id
  * @property Author $author
  * @property Collection|Comment $comments
@@ -27,7 +28,8 @@ class Post extends Model
         'title',
         'description',
         'body',
-        'author_id'
+        'author_id',
+        'image'
     ];
 
     public function comments(): HasMany {
