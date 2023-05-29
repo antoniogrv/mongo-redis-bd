@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Post;
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -30,7 +29,13 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('pages.post_detail', ['post' => $post]);
+        $cache_hit = Cache::has("post.{$post->id}");
+
+        $contents =  view('pages.post_detail', [
+            'post' => Cache::rememberForever("post.{$post->id}", fn() => $post)
+        ]);
+
+        return response($contents)->header('Redis-Cache', $cache_hit);
     }
     public function edit(Post $post)
     {
