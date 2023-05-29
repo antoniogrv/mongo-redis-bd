@@ -4,7 +4,9 @@
         <div class="brand-tagline">
             Un blog esemplificativo <br />
             che fa uso di MongoDB per la persistenza <br/>
-            e Redis per il caching
+            e Redis per il caching<br />
+
+            <a style="text-decoration: underline; font-weight: bold"; href="{{route('posts.create')}}">Crea un nuovo post!</a>
         </div>
     </div>
 </div>

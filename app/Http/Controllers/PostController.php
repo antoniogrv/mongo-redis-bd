@@ -2,79 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('pages.post_create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePostRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
-        //
+        $post = Post::query()->create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'body' => $request->input('body'),
+            'image' => 'assets/' . rand(1, 10) . '.jpeg',
+            'author_id' => Author::all()->random()->first()->id,
+        ]);
+
+        return view('pages.post_detail', ['post' => $post]);
     }
 
     public function show(Post $post)
     {
         return view('pages.post_detail', ['post' => $post]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
-        //
+        return view('pages.post_update', ['post' => $post]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePostRequest  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
-        //
+        $post->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'body' => $request->input('body'),
+        ]);
+
+        return view('pages.post_detail', ['post' => $post]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('home')->with([
+            'message' => 'Post eliminato con successo!'
+        ]);
     }
 }

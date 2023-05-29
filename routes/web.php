@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.home', [
-        'posts' => \App\Models\Post::all()->sortBy('body')
+        'posts' => \App\Models\Post::all()->sortByDesc('created_at')
     ]);
 })->name('home');
 
