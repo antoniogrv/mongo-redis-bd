@@ -36,3 +36,10 @@ Port: 6379
 Logical Index: 1
 ```
 
+### Exports
+
+```
+mongoexport --uri="mongodb://user:password@mongodb/db"  --collection=authors  --out=authors.csv
+mongoexport --uri="mongodb://user:password@mongodb/db"  --collection=posts  --out=posts.csv
+mongoexport --uri="mongodb://user:password@mongodb/db"  --collection=comments  --out=comments.csv
+```

@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('users', function (Request $request) {
-    return \App\Models\User::all();
+    return \App\Models\Author::all();
 });
 
 Route::get('get', function (Request $request) {
